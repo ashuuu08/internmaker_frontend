@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fade in animation */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+.animate-fadeIn {
+  animation: fadeIn 1s ease forwards;
+}
+.animate-fadeIn.delay-200 {
+  animation-delay: 0.2s;
+}
+.animate-fadeIn.delay-400 {
+  animation-delay: 0.4s;
+}
+
+/* Pulsing circles background */
+@keyframes pulseCircle {
+  0%, 100% { transform: scale(1) translate(0,0); opacity: 0.3; }
+  50% { transform: scale(1.5) translate(20px,20px); opacity: 0.1; }
+}
+.animate-pulseCircle {
+  animation: pulseCircle 6s ease-in-out infinite;
+}
