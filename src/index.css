@@ -2,26 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fade in animation */
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(20px);}
-  100% { opacity: 1; transform: translateY(0);}
-}
-.animate-fadeIn {
-  animation: fadeIn 1s ease forwards;
-}
-.animate-fadeIn.delay-200 {
-  animation-delay: 0.2s;
-}
-.animate-fadeIn.delay-400 {
-  animation-delay: 0.4s;
+@layer base {
+  html, body {
+    width: 100%;
+    overflow-x: hidden; /* This kills the horizontal scrollbar */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  #root {
+   width: 100%;
+    overflow-x: hidden;
+    position: relative;
+
+  }
 }
 
-/* Pulsing circles background */
-@keyframes pulseCircle {
-  0%, 100% { transform: scale(1) translate(0,0); opacity: 0.3; }
-  50% { transform: scale(1.5) translate(20px,20px); opacity: 0.1; }
+/* Your Animations */
+@layer utilities {
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  @keyframes pulseCircle {
+    0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.3; }
+    50% { transform: scale(1.5) translate(20px, 20px); opacity: 0.1; }
+  }
+  .animate-pulseCircle {
+    animation: pulseCircle 6s ease-in-out infinite;
+  }
+  
+  /* Helper to force hide scrollbars if needed */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
-.animate-pulseCircle {
-  animation: pulseCircle 6s ease-in-out infinite;
+/* We wrap custom animations in @layer utilities 
+   so they load in the correct order and don't conflict 
+   with other Tailwind classes.
+*/
+@layer utilities {
+  
+  /* --- Fade In Animation --- */
+  @keyframes fadeIn {
+    0% { 
+      opacity: 0; 
+      transform: translateY(20px); 
+    }
+    100% { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-out forwards; /* Changed 'ease' to 'ease-out' for smoother entry */
+  }
+
+  /* Animation Delays */
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+  .delay-600 {
+    animation-delay: 600ms;
+  }
+
+  /* --- Pulsing Background Circle --- */
+  @keyframes pulseCircle {
+    0%, 100% { 
+      transform: scale(1) translate(0, 0); 
+      opacity: 0.3; 
+    }
+    50% { 
+      transform: scale(1.5) translate(20px, 20px); 
+      opacity: 0.1; 
+    }
+  }
+
+  .animate-pulseCircle {
+    animation: pulseCircle 6s ease-in-out infinite;
+  }
 }
